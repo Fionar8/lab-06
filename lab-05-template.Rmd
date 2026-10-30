@@ -21,8 +21,7 @@ library(ggplot2)
 knitr::include_graphics("img/Speaking-the-world.jpg")
 ```
 
-_Write your comments about image 1 below_
-
+The bar graph isn't scaled the very best - it goes from 765 million to 1026 billion but there is only a small difference in the bar height for those two.
 
 
 
@@ -32,8 +31,7 @@ _Write your comments about image 1 below_
 knitr::include_graphics("img/rose-pop-density-total-area-bw.jpg")
 ```
 
-_Write your comments about image 2 below_
-
+No numbers given - cant tell what percentage each section is. Black and white also makes it harder to differentiate between the different countries.
 
 
 
@@ -43,8 +41,7 @@ _Write your comments about image 2 below_
 knitr::include_graphics("img/life-expectancy-rule-of-law.png")
 ```
 
-_Write your comments about image 3 below_
-
+The graph is not very clear, in areas where there is a lot of data points and overlap, you cant tell what each little circle is saying.
 
 
 
@@ -54,8 +51,7 @@ _Write your comments about image 3 below_
 knitr::include_graphics("img/global-income-dist.PNG")
 ```
 
-_Write your comments about image 4 below_
-
+There is no values for the y-axis, it says that it is scales so that the area under the graph corresponds to the population but there is no axis to figure out the area under the graph.
 
 
 # Data Visualization for Halloween 
@@ -83,7 +79,7 @@ glimpse(candy_df)
 How many observations and variables are in this dataset?
 Did you identify the type of variables, remember that this detail is crucial to create which kind of data visualization in general. 
 
-_Write your comments about results_
+There are 13 columns (so variables) and 85 rows. They type of variables are logical and double.
 
 # Data viz - One variable at a time
 
@@ -99,17 +95,31 @@ candy_df <- candy_df %>%
 Complete the following code to get the data viz to represent "how many candies contain caramel via bar plot". Fill in the blanks, remove the # symbol in front of your code and the execute the code chunk via green play button.
 
 ```{r}
-# ggplot(candy_rankings, aes(x = ______)) +
-#  _____() +
+ ggplot(candy_rankings, aes(x = caramel)) +
+  geom_bar() +
+  labs(
+    title = "candies that contain caramel"
+  )
+
+ ggplot(candy_rankings, aes(x = chocolate)) +
+  geom_bar() +
+  labs(
+    title = "candies that contain chocolate",
+    x = "Chocolate",
+    y = "number of candies"
+  )
+
 ```
+There are a greater number of candies that contain caramel than those that don't contain caramel. 
 
 ## Exercise 3
 
 Now look at a numerical variable, such as `winpercent`. Create an histogram for this variable using ggplot2 functions below. Include informative x and y labels and a title, as a good practice.
 
 ```{r}
-# Your code here
-
+ggplot(candy_rankings, aes(x = winpercent)) +
+  geom_histogram(binwidth = 20) +
+  labs(x = "Winpercent (%)")
 ```
 
 
@@ -123,9 +133,11 @@ Fill in the blanks, remove the # symbol in front of your code and the execute th
 
 ```{r}
 # Your code here
-#ggplot(candy_df, aes(x = ___________)) +
-#  geom_histogram() +
-#  facet_wrap(___________)
+ggplot(candy_df, aes(x = winpercent,
+                     fill = caramel
+                     )) +
+  geom_histogram(binwidth = 5) +
+  facet_wrap(~ chocolate)
 
 ```
 
